@@ -27,7 +27,7 @@ public class PageController {
 	@RequestMapping(value="/contact", method=RequestMethod.GET)
 	public ModelAndView contact() {
 		ModelAndView mv = new ModelAndView("page");
-		mv.addObject("title", "Contect");
+		mv.addObject("title", "Contact");
 		mv.addObject("userClickContact", true);
 		return mv;
 	}
