@@ -25,10 +25,14 @@
 
 <script type="text/javascript">
 	window.menu = "${title}";
+	window.contextRoot = "${contextRoot}"
 </script>
 <!-- Bootstrap core CSS -->
-<link href="${btcss}/bootstrap.min.css" rel="stylesheet">
-<link href="${btcss}/bootstrap-readable-theme.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
+<!-- <link href="${btcss}/bootstrap.min.css" rel="stylesheet">  
+<link href="${btcss}/bootstrap-superhero-theme.css" rel="stylesheet">-->
+<link href="${btcss}/dataTables.bootstrap.css" rel="stylesheet">
 
 
 <!-- Custom styles for this template -->
@@ -66,8 +70,12 @@
 
 		<!-- Bootstrap core JavaScript -->
 		<script src="${jquery}/jquery.min.js"></script>
-		<script src="${btjs}/bootstrap.bundle.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<!-- <script src="${btjs}/bootstrap.bundle.min.js"></script> -->
+		<script src="${btjs}/jquery.dataTables.js"></script>
+		<script src="${btjs}/dataTables.bootstrap.js"></script>
 		<script src="${btjs}/myApp.js"></script>
+		
 	</div>
 </body>
 

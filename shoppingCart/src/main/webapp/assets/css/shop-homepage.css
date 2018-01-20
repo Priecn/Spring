@@ -39,3 +39,12 @@ body {
 	height: 60px;
 	width: 100%
 }
+
+@font-face {
+    font-family: "shop-icons";
+    src: url(../vendor/bootstrap/fonts/glyphicons-halflings-regular.svg) format("svg"),
+        url(../vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf) format("truetype"),
+        url(../vendor/bootstrap/fonts/glyphicons-halflings-regular.eot),
+        url(../vendor/bootstrap/fonts/glyphicons-halflings-regular.woff) format("woff"),
+        url(../vendor/bootstrap/fonts/glyphicons-halflings-regular.woff2 format("woff2"));
+}
