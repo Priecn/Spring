@@ -26,11 +26,16 @@ body {
 }
 
 .content{
-	padding-bottom: 80px; /*height of footer*/
+	padding-bottom: 100px; /*height of footer*/
 }
 
 .footerstyle{
 	position: absolute;
 	bottom: 0px;
-	height: 80px;
+	height: 100px;
+}
+
+.dataTableImg{
+	height: 100px;
+	width: 100px;
 }

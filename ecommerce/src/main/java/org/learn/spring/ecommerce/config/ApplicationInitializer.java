@@ -1,5 +1,7 @@
 package org.learn.spring.ecommerce.config;
 
+import javax.servlet.ServletRegistration;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
@@ -17,6 +19,10 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
+	}
+	
+	public void customizeRegistration(ServletRegistration.Dynamic registration) {
+		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
 	}
 
 }

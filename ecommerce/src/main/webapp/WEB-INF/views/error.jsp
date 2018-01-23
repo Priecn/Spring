@@ -5,8 +5,6 @@
 <%@taglib prefix="s" uri="http://www.springframework.org/tags"%>
 
 <s:url var="css" value="/resources/css" />
-<s:url var="js" value="/resources/js" />
-<s:url var="images" value="/resources/images" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
@@ -51,43 +49,27 @@
 <body>
 	<div class="wrapper">
 		<!-- Navigation -->
-		<%@include file="./shared/navbar.jsp"%>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<div class="container">
+				<a class="navbar-brand" href="${contextRoot}/home">Ecommerce</a>
+			</div>
+		</nav>
 
 		<!-- Page Content -->
 		<div class="content">
-			<c:if test="${userClickHome == true}">
-				<%@include file="./home.jsp"%></c:if>
-			<c:if test="${userClickAbout == true}">
-				<%@include file="./about.jsp"%></c:if>
-			<c:if test="${userClickContact == true}">
-				<%@include file="./contact.jsp"%></c:if>
-			<c:if
-				test="${userClickAllProducts == true or userClickCategoryProducts == true}">
-				<%@include file="./listProducts.jsp"%></c:if>
-			<c:if test="${ userClickShowProduct == true}">
-				<%@include file="./singleProduct.jsp"%></c:if>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="jumbotron">
+							<h1>${errorTitle}</h1>
+							<blockquote style="word-wrap: break-word;">${errorDescription}</blockquote>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- Footer -->
 		<%@include file="./shared/footer.jsp"%>
-
-		<!-- Jquery -->
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-		<!-- data table -->
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-		<script type="text/javascript"
-			src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-		<script type="text/javascript"
-			src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-
-		<!-- bootstrap -->
-		<script
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		<script
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-
-
-		<script src="${js}/script.js"></script>
 	</div>
 </body>
 
