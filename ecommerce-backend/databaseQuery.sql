@@ -15,6 +15,7 @@ INSERT INTO category (name, description,image_url,is_active) VALUES ('Television
 INSERT INTO category (name, description,image_url,is_active) VALUES ('Mobile', 'This is description for Mobile category!', 'CAT_3.png', true);
 
 select * from category;
+delete from category where name='ax';
 
 CREATE TABLE user_detail (
 	id SERIAL,
@@ -77,7 +78,8 @@ VALUES ('PRDMNO123PQRX', ' Macbook Pro', 'apple', 'This is one of the best lapto
 INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
 VALUES ('PRDABCXYZDEFX', 'Dell Latitude E6510', 'dell', 'This is one of the best laptop series from dell that can be used!', 48000, 5, true, 1, 3 );
 
-update product set quantity=0 where id= 33;
+update product set is_active=false where id= 33;
+
 select * from product;
 
 commit;

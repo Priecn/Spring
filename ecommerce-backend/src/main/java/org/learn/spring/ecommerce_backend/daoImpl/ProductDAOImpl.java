@@ -78,6 +78,16 @@ public class ProductDAOImpl implements ProductDAO {
 		return false;
 	}
 	
+	public boolean activate(Product product) {
+		try {
+			product.setActive(true);
+			sessionFactory.getCurrentSession().update(product);
+			return true;
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
 
 	public List<Product> listActiveProducts() {
 		try {

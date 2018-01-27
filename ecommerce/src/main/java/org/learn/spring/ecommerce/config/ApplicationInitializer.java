@@ -1,5 +1,6 @@
 package org.learn.spring.ecommerce.config;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -23,6 +24,7 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
 	
 	public void customizeRegistration(ServletRegistration.Dynamic registration) {
 		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+		registration.setMultipartConfig(new MultipartConfigElement("C:\\Users\\Prince\\Documents\\", 2097152, 4194304, 1048576));
 	}
 
 }
