@@ -99,4 +99,13 @@ public class PageController {
 		mv.addObject("userClickShowProduct", true);
 		return mv;
 	}
+	
+	//having similar mapping to out flow id
+	@RequestMapping(value="/register", method=RequestMethod.GET)
+	public ModelAndView register() {
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("title", "About Us");
+		return mv;
+	}
+	
 }

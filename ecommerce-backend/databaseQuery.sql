@@ -83,5 +83,6 @@ update product set is_active=false where id= 33;
 select * from product;
 select * from cart;
 select * from address;
+select * from user_detail;
 
 commit;

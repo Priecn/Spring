@@ -7,10 +7,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = {"org.learn.spring.ecommerce", "org.learn.spring.ecommerce_backend"}, excludeFilters= {
-		@Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)
-})
-
+@ComponentScan(basePackages = {"org.learn.spring.ecommerce", "org.learn.spring.ecommerce_backend"})
 //@PropertySources(value= {@PropertySource("classpath:db.properties")})
 public class RootConfig {
 

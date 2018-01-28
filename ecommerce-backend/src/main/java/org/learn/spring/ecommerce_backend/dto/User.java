@@ -1,32 +1,58 @@
 package org.learn.spring.ecommerce_backend.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="user_detail")
-public class User {
+public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@Column(name="first_name")
+	@NotBlank(message="Please Enter first name")
 	private String firstName;
 	@Column(name="last_name")
+	@NotBlank(message="Please Enter last name")
 	private String lastName;
+	@NotBlank(message="Please Enter email id")
 	private String email;
 	@Column(name="contact_number")
+	@NotBlank(message="Please Enter contact number")
 	private String contactNumber;
 	private String role;
+	@NotBlank(message="Please Enter password")
 	private String password;
 	private boolean enabled = true;
-	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Cart cart;
+	
+	//confirm password transient field
+	@Transient
+	@NotBlank(message="Please Enter password again")
+	private String confirmPassword;
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 	public int getId() {
 		return id;
 	}

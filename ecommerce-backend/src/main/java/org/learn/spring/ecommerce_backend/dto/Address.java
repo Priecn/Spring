@@ -1,28 +1,38 @@
 package org.learn.spring.ecommerce_backend.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Address {
+public class Address implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@ManyToOne
-	private User user;
+	private int userId;
 	
 	@Column(name="address_line_one")
+	@NotBlank(message="Please Enter Address")
 	private String addressLineOne;
 	@Column(name="address_line_two")
 	private String addressLineTwo;
+	@NotBlank(message="Please Enter city")
 	private String city;
+	@NotBlank(message="Please Enter state")
 	private String state;
+	@NotBlank(message="Please Enter country")
 	private String country;
 	@Column(name="postal_code")
+	@NotBlank(message="Please Enter postal code")
 	private String postalCode;
 	private boolean shipping;
 	private boolean billing;
@@ -76,7 +86,7 @@ public class Address {
 	}
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", userId=" + user.getId() + ", addressLineOne=" + addressLineOne + ", addressLineTwo="
+		return "Address [id=" + id + ", userId=" + userId + ", addressLineOne=" + addressLineOne + ", addressLineTwo="
 				+ addressLineTwo + ", city=" + city + ", state=" + state + ", postalCode=" + postalCode + ", shipping="
 				+ shipping + ", billing=" + billing + "]";
 	}
@@ -86,10 +96,10 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public User getUser() {
-		return user;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 }
