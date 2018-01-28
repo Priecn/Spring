@@ -1,4 +1,4 @@
-package orr.learn.spring.ecommerce_backend;
+package org.learn.spring.ecommerce_backend;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

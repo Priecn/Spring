@@ -81,5 +81,7 @@ VALUES ('PRDABCXYZDEFX', 'Dell Latitude E6510', 'dell', 'This is one of the best
 update product set is_active=false where id= 33;
 
 select * from product;
+select * from cart;
+select * from address;
 
 commit;
