@@ -60,9 +60,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="jumbotron">
-							<h1>${errorTitle}</h1>
-							<blockquote style="word-wrap: break-word;">${errorDescription}</blockquote>
+						<div class="jumbotron jumbotron-fluid">
+							<h1 class="display-3">${errorTitle}</h1>
+							<hr class="my-4">
+							<p class="lead">${errorDescription}</p>
 						</div>
 					</div>
 				</div>

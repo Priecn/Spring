@@ -9,7 +9,7 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] {RootConfig.class};
+		return new Class<?>[] {RootConfig.class, WebSecurityConfig.class};
 	}
 
 	@Override
@@ -21,6 +21,7 @@ public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherSe
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
 	}
+	
 	
 	public void customizeRegistration(ServletRegistration.Dynamic registration) {
 		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");

@@ -23,25 +23,31 @@ CREATE TABLE user_detail (
 	last_name VARCHAR(50),
 	role VARCHAR(50),
 	enabled BOOLEAN,
-	password VARCHAR(50),
+	password VARCHAR(60),
 	email VARCHAR(100),
 	contact_number VARCHAR(15),	
 	CONSTRAINT pk_user_id PRIMARY KEY (id)
 );
 
+drop table user_detail cascade;
 
 INSERT INTO user_detail 
 (first_name, last_name, role, enabled, password, email, contact_number) 
-VALUES ('Virat', 'Kohli', 'ADMIN', true, 'admin', 'vk@gmail.com', '8888888888');
+VALUES ('Virat', 'Kohli', 'ADMIN', true, '$2y$10$MgtCmg2rm.LWb3vyjZ90I.hJV3r4CeeXDMVQ6sSAd8.85.3xjlz8i', 'vk@gmail.com', '8888888888');
 
 INSERT INTO user_detail 
 (first_name, last_name, role, enabled, password, email, contact_number) 
-VALUES ('Ravindra', 'Jadeja', 'SUPPLIER', true, '12345', 'rj@gmail.com', '9999999999');
+VALUES ('Ravindra', 'Jadeja', 'SUPPLIER', true, '$2y$10$H3s5dwPVJhJJlOc1T2nVieEevz1/nmGb5OFFyad3jc44dlamv9DF6', 'rj@gmail.com', '9999999999');
 
 INSERT INTO user_detail 
 (first_name, last_name, role, enabled, password, email, contact_number) 
-VALUES ('Ravichandra', 'Ashwin', 'SUPPLIER', true, '12345', 'ra@gmail.com', '7777777777');
+VALUES ('Ravichandra', 'Ashwin', 'SUPPLIER', true, '$2y$10$0BBi8olm0uUmmVMokmSQ1O9C6o.vQfhSXX2JpAC3OkF8oa9DUgZFq', 'ra@gmail.com', '7777777777');
 
+INSERT INTO user_detail 
+(first_name, last_name, role, enabled, password, email, contact_number) 
+VALUES ('Prince', 'Kumar', 'USER', true, '$2y$10$GsIPAAXBCJxJgg9RjJ9nveezrD6ORLxulYhkDcFWb0zYSWc4cNyha', 'pk@gmail.com', '6666666666');
+
+update user_detail set role = 'ADMIN' where email = 'vk@gmail.com';
 select * from user_detail;
 
 CREATE TABLE product (
@@ -63,20 +69,20 @@ CREATE TABLE product (
 );	
 
 
-INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDABC123DEFX', 'iPhone 5s', 'apple', 'This is one of the best phone available in the market right now!', 18000, 5, true, 3, 2 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDABC123DEFX', 'iPhone 5s', 'apple', 'This is one of the best phone available in the market right now!', 18000, 5, true, 3, 2, 0, 0);
 
-INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDDEF123DEFX', 'Samsung s7', 'samsung', 'A smart phone by samsung!', 32000, 2, true, 3, 3 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDDEF123DEFX', 'Samsung s7', 'samsung', 'A smart phone by samsung!', 32000, 2, true, 3, 3, 0, 0);
 
-INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDPQR123WGTX', 'Google Pixel', 'google', 'This is one of the best android smart phone available in the market right now!', 57000, 5, true, 3, 2 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDPQR123WGTX', 'Google Pixel', 'google', 'This is one of the best android smart phone available in the market right now!', 57000, 5, true, 3, 2, 0, 0);
 
-INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDMNO123PQRX', ' Macbook Pro', 'apple', 'This is one of the best laptops available in the market right now!', 54000, 3, true, 1, 2 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDMNO123PQRX', ' Macbook Pro', 'apple', 'This is one of the best laptops available in the market right now!', 54000, 3, true, 1, 2, 0, 0 );
 
-INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id)
-VALUES ('PRDABCXYZDEFX', 'Dell Latitude E6510', 'dell', 'This is one of the best laptop series from dell that can be used!', 48000, 5, true, 1, 3 );
+INSERT INTO product (code, name, brand, description, unit_price, quantity, is_active, category_id, supplier_id, purchases, views)
+VALUES ('PRDABCXYZDEFX', 'Dell Latitude E6510', 'dell', 'This is one of the best laptop series from dell that can be used!', 48000, 5, true, 1, 3, 0, 0 );
 
 update product set is_active=false where id= 33;
 

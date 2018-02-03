@@ -1,7 +1,7 @@
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <div class="container">
 	<div class="row">
-		<c:if test="${message eq 'Product Submitted Successfully!'}">
+		<c:if test="${not empty message}">
 			<div class="col-xs-12 col-md-12">
 				<div class="alert alert-success alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -9,27 +9,11 @@
 				</div>
 			</div>
 		</c:if>
-		<c:if test="${message eq 'Category added Successfully!'}">
-			<div class="col-xs-12 col-md-12">
-				<div class="alert alert-success alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					${message}
-				</div>
-			</div>
-		</c:if>
-		<c:if test="${message eq 'Product Deleted Successfully!'}">
-			<div class="col-xs-12 col-md-12">
-				<div class="alert alert-success alert-dismissible">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					${message}
-				</div>
-			</div>
-		</c:if>
-		<c:if test="${message eq 'Validation failed for product Submission!'}">
+		<c:if test="${not empty error}">
 			<div class="col-xs-12 col-md-12">
 				<div class="alert alert-danger alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					${message}
+					${error}
 				</div>
 			</div>
 		</c:if>
@@ -145,7 +129,7 @@
 		</div>
 
 		<div class="col-md-12">
-			<div style="overflow: auto;">
+			<div class="container-fluid" style="overflow: auto;">
 				<table id="adminProductsTable"
 					class="table table-striped table-bordered">
 

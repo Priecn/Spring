@@ -17,6 +17,17 @@ $(function() {
 		$('#home').addClass('active');
 	}
 
+	// for csrf
+	var token = $('meta[name="_csrf"]').attr('content');
+	var header = $('meta[name="_csrf_header"]').attr('content');
+
+	if (token.length > 0 && header.length > 0) {
+		// set the csrf token and header for ajax request
+		$(document).ajaxSend(function(event, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+	}
+
 	var $table = $('#productListTable');
 
 	if ($table.length) {
@@ -76,14 +87,21 @@ $(function() {
 											+ '/show/'
 											+ id
 											+ '/product"><i class="fa fa-eye"></i></a> &nbsp; &nbsp;';
-									if (row.quantity < 1)
-										urlString += '<a href="javascript: void(0)"><i class="fa fa-shopping-cart"></i></a>';
-									else
+									if (window.userRole == 'USER') {
+										if (row.quantity < 1)
+											urlString += '<a href="javascript: void(0)"><i class="fa fa-shopping-cart"></i></a>';
+										else
+											urlString += '<a href="'
+													+ window.contextRoot
+													+ '/cart/add/'
+													+ id
+													+ '/product"><i class="fa fa-shopping-cart"></i></a>';
+									} else if (window.userRole == 'ADMIN')
 										urlString += '<a href="'
 												+ window.contextRoot
-												+ '/cart/add/'
+												+ '/manage/'
 												+ id
-												+ '/product"><i class="fa fa-shopping-cart"></i></a>';
+												+ '/product"><i class="fa fa-edit"></i></a>';
 									return urlString;
 								},
 								bSortable : false
@@ -170,10 +188,10 @@ $(function() {
 											+ id
 											+ '/product"><i class="fa fa-pencil-square-o"></i></a>';
 									urlString += '&#160; &#160;<a href="'
-										+ window.contextRoot
-										+ '/manage/delete/'
-										+ id
-										+ '/product"><i class="fa fa-trash-o"></i></a>';
+											+ window.contextRoot
+											+ '/manage/delete/'
+											+ id
+											+ '/product"><i class="fa fa-trash-o"></i></a>';
 									return urlString;
 								},
 								bSortable : false
@@ -202,16 +220,23 @@ $(function() {
 															if (confirmed) {
 																console
 																		.log(value);
-																var activationUrl = window.contextRoot+'/manage/product/'+value+'/activation';
-																$.post(activationUrl, function(data){
-																	bootbox
-																	.alert({
-																		size : 'medium',
-																		title : 'Information',
-																		message : data
-																	});
-																})
-																
+																var activationUrl = window.contextRoot
+																		+ '/manage/product/'
+																		+ value
+																		+ '/activation';
+																$
+																		.post(
+																				activationUrl,
+																				function(
+																						data) {
+																					bootbox
+																							.alert({
+																								size : 'medium',
+																								title : 'Information',
+																								message : data
+																							});
+																				})
+
 															} else {
 																checkbox
 																		.prop(
@@ -224,37 +249,67 @@ $(function() {
 					}
 				});
 	}
-	
-	$('#addCategoryButton').on('click', function(){
+
+	$('#addCategoryButton').on('click', function() {
 		$('#categoryModal').modal({
-		    backdrop: 'static',
-		    keyboard: false
+			backdrop : 'static',
+			keyboard : false
 		});
 	});
-	
+
 	$categoryForm = $('#categoryForm');
-	if($categoryForm.length){
-		$categoryForm.validate({
-			rules: {
-				name: {
-					required: true,
-					minlength: 2
+	if ($categoryForm.length) {
+		$categoryForm
+				.validate({
+					rules : {
+						name : {
+							required : true,
+							minlength : 2
+						},
+						description : {
+							required : true
+						}
+					},
+					messages : {
+						name : {
+							required : 'Please add the category name!',
+							minlength : 'length of name should not be less than 2 characters'
+						},
+						description : {
+							required : 'Please add description!'
+						}
+					},
+					errorElement : 'em',
+					errorPlacement : function(error, element) {
+						error.addClass('help-block');
+						error.insertAfter(element);
+					}
+				});
+	}
+
+	$loginForm = $('#loginForm');
+	if ($loginForm.length) {
+		$loginForm.validate({
+			rules : {
+				username : {
+					required : true,
+					email : true
 				},
-				description: {
-					required: true
+				password : {
+					required : true
 				}
 			},
-			messages: {
-				name: {
-					required: 'Please add the category name!',
-					minlength: 'length of name should not be less than 2 characters'
+			messages : {
+				username : {
+					required : 'Please enter username!',
+					email : 'please enter valid email'
 				},
-				description: {
-					required: 'Please add description!'
+				password : {
+					required : 'Please enter password!'
 				}
 			},
-			errorElement: 'em',
-			errorPlacement: function(error, element){
+			errorElement : 'em',
+			errorPlacement : function(error, element) {
 				error.addClass('help-block');
 				error.insertAfter(element);
 			}
