@@ -1,13 +1,13 @@
-/*package net.kzn.shoppingbackend.test;
+package org.learn.spring.ecommerce_backend.test;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.learn.spring.ecommerce_backend.dao.ProductDAO;
+import org.learn.spring.ecommerce_backend.dto.Product;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import net.kzn.shoppingbackend.dao.ProductDAO;
-import net.kzn.shoppingbackend.dto.Product;
 
 public class ProductTestCase {
 
@@ -23,7 +23,7 @@ public class ProductTestCase {
 	@BeforeClass
 	public static void init() {
 		context = new AnnotationConfigApplicationContext();
-		context.scan("net.kzn.shoppingbackend");
+		context.scan("org.learn.spring.ecommerce_backend");
 		context.refresh();
 		productDAO = (ProductDAO)context.getBean("productDAO");
 	}
@@ -40,12 +40,12 @@ public class ProductTestCase {
 		product.setUnitPrice(25000);
 		product.setActive(true);
 		product.setCategoryId(3);
-		product.setSupplierId(3);
+		product.setSupplierId(1);
 		
 		assertEquals("Something went wrong while inserting a new product!",
 				true,productDAO.add(product));		
 		
-		
+		/*
 		// reading and updating the category
 		product = productDAO.get(2);
 		product.setName("Samsung Galaxy S7");
@@ -57,11 +57,11 @@ public class ProductTestCase {
 		
 		// list
 		assertEquals("Something went wrong while fetching the list of products!",
-				6,productDAO.list().size());		
+				6,productDAO.list().size());	*/	
 				
 	}
 			
-	
+/*	
 	@Test
 	public void testListActiveProducts() {
 		assertEquals("Something went wrong while fetching the list of products!",
@@ -82,10 +82,9 @@ public class ProductTestCase {
 		assertEquals("Something went wrong while fetching the list of products!",
 				3,productDAO.getLatestActiveProducts(3).size());
 		
-	} 
+	} */
 	
 	
 	
 		
 }
-*/

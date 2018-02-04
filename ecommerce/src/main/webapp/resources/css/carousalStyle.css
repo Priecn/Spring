@@ -1,0 +1,27 @@
+.slide-control {
+	color: #000;
+	font-size: 80px;
+	left: -30px;
+	margin-top: -70px;
+	position: absolute;
+	top: 50%;
+}
+
+.slide-control.right {
+	left: auto;
+	right: -30px;
+}
+
+.slide-control.banners {
+	color: #808080;
+	font-size: 80px;
+	left: 30px;
+	margin-top: -70px;
+	position: absolute;
+	top: 50%;
+}
+
+.slide-control.banners.right {
+	left: auto;
+	right: 30px;
+}

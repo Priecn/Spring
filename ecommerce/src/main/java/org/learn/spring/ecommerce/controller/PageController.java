@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.learn.spring.ecommerce.exception.ProductNotFoundException;
+import org.learn.spring.ecommerce.service.ProductService;
 import org.learn.spring.ecommerce_backend.dao.CategoryDAO;
 import org.learn.spring.ecommerce_backend.dao.ProductDAO;
 import org.learn.spring.ecommerce_backend.dto.Category;
@@ -30,6 +31,9 @@ public class PageController {
 
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private ProductService productService;
 
 	@RequestMapping(value = { "/", "/home", "/index" }, method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -43,6 +47,9 @@ public class PageController {
 
 		// passing the categories
 		mv.addObject("categories", categoryDAO.getListOfCategory());
+		//passing recent products
+		mv.addObject("mostRecentProducts", productService.getRecentProduct(true));
+		mv.addObject("nextRecentProducts", productService.getRecentProduct(false));
 		return mv;
 	}
 
@@ -145,4 +152,10 @@ public class PageController {
 		return "redirect:/login?logout";
 	}
 
+	@RequestMapping(value = "/slider", method = RequestMethod.GET)
+	public ModelAndView slider() {
+		ModelAndView mv = new ModelAndView("sliderDemo");
+		mv.addObject("title", "Slider");
+		return mv;
+	}
 }

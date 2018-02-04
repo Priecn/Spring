@@ -1,10 +1,14 @@
 package org.learn.spring.ecommerce_backend.daoImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.learn.spring.ecommerce_backend.dao.CategoryDAO;
 import org.learn.spring.ecommerce_backend.dao.ProductDAO;
+import org.learn.spring.ecommerce_backend.dto.Category;
 import org.learn.spring.ecommerce_backend.dto.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +20,8 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Autowired
+	private CategoryDAO categoryDAO;
 	
 	public Product get(int productId) {
 		try {
@@ -113,6 +119,20 @@ public class ProductDAOImpl implements ProductDAO {
 		}
 		return null;
 	}
+	
+	public List<Product> listRecentSixActiveProductsByCategory(int category) {
+		try {
+			String queryToGetListOfProductByCategory = "from Product where active = :active and categoryId = :categoryId order by id desc";
+			Query<Product> query = sessionFactory.getCurrentSession().createQuery(queryToGetListOfProductByCategory, Product.class);
+			query.setParameter("categoryId", Integer.valueOf(category));
+			query.setParameter("active", true);
+			query.setMaxResults(6);
+			return query.getResultList();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
 
 	public List<Product> getLatestActiveProducts(int count) {
 		try {
@@ -122,6 +142,22 @@ public class ProductDAOImpl implements ProductDAO {
 			return query.setFirstResult(0).setMaxResults(count).getResultList();
 		} catch(Exception ex) {
 			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Map<Integer, List<Product>> getMapOfProductForEachCategory() {
+		List<Category> listOfCategory = categoryDAO.getListOfCategory();
+		Map<Integer, List<Product>> map = null;
+		if(listOfCategory != null) {
+			map = new HashMap<Integer, List<Product>>();
+			for(Category category: listOfCategory) {
+				List<Product> listOfProduct = listRecentSixActiveProductsByCategory(category.getId());
+				if(listOfCategory != null)
+					map.put(category.getId(), listOfProduct);
+			}
+			return map;
 		}
 		return null;
 	}
