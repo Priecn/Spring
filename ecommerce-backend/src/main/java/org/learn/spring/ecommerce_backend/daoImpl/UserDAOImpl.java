@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.learn.spring.ecommerce_backend.dao.UserDAO;
 import org.learn.spring.ecommerce_backend.dto.Address;
-import org.learn.spring.ecommerce_backend.dto.Cart;
 import org.learn.spring.ecommerce_backend.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,17 +32,6 @@ public class UserDAOImpl implements UserDAO {
 	public boolean addAddress(Address address) {
 		try {
 			sessionFactory.getCurrentSession().persist(address);
-			return true;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return false;
-	}
-
-	@Override
-	public boolean updateCart(Cart cart) {
-		try {
-			sessionFactory.getCurrentSession().update(cart);
 			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();

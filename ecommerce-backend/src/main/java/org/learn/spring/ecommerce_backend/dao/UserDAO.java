@@ -3,7 +3,6 @@ package org.learn.spring.ecommerce_backend.dao;
 import java.util.List;
 
 import org.learn.spring.ecommerce_backend.dto.Address;
-import org.learn.spring.ecommerce_backend.dto.Cart;
 import org.learn.spring.ecommerce_backend.dto.User;
 
 public interface UserDAO {
@@ -13,5 +12,4 @@ public interface UserDAO {
 	boolean addAddress(Address address);
 	Address getBillingAddress(User user);
 	List<Address> listOfShippingAddresses(User user);
-	boolean updateCart(Cart cart);
 }

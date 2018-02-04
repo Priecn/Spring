@@ -13,6 +13,9 @@ $(function() {
 	case 'Manage Products':
 		$('#manageProducts').addClass('active');
 		break;
+	case 'Cart':
+		$('#profileDropDown').addClass('active');
+		break;
 	default:
 		$('#home').addClass('active');
 	}
@@ -86,22 +89,22 @@ $(function() {
 											+ window.contextRoot
 											+ '/show/'
 											+ id
-											+ '/product"><i class="fa fa-eye"></i></a> &nbsp; &nbsp;';
+											+ '/product" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a> &nbsp; &nbsp;';
 									if (window.userRole == 'USER') {
 										if (row.quantity < 1)
-											urlString += '<a href="javascript: void(0)"><i class="fa fa-shopping-cart"></i></a>';
+											urlString += '<a href="javascript: void(0)" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i></a>';
 										else
 											urlString += '<a href="'
 													+ window.contextRoot
 													+ '/cart/add/'
 													+ id
-													+ '/product"><i class="fa fa-shopping-cart"></i></a>';
+													+ '/product" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i></a>';
 									} else if (window.userRole == 'ADMIN')
 										urlString += '<a href="'
 												+ window.contextRoot
 												+ '/manage/'
 												+ id
-												+ '/product"><i class="fa fa-edit"></i></a>';
+												+ '/product" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>';
 									return urlString;
 								},
 								bSortable : false
@@ -186,12 +189,12 @@ $(function() {
 											+ window.contextRoot
 											+ '/manage/'
 											+ id
-											+ '/product"><i class="fa fa-pencil-square-o"></i></a>';
+											+ '/product" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o"></i></a>';
 									urlString += '&#160; &#160;<a href="'
 											+ window.contextRoot
 											+ '/manage/delete/'
 											+ id
-											+ '/product"><i class="fa fa-trash-o"></i></a>';
+											+ '/product" class="btn btn-denger btn-sm"><i class="fa fa-trash-o"></i></a>';
 									return urlString;
 								},
 								bSortable : false
@@ -315,4 +318,34 @@ $(function() {
 			}
 		});
 	}
+
+	// handling click event of refresh cart
+	$('button[name="refreshCart"]')
+			.click(
+					function() {
+						var cartLineId = $(this).attr('value');
+						var countElement = $('#count_' + cartLineId);
+						var originalCount = countElement.attr('value');
+						var currentCount = countElement.val();
+						// work only when count has changed
+						if (currentCount !== originalCount) {
+							// validate new count
+							if (currentCount < 1 || currentCount > 3) {
+								countElement.val(originalCount);
+								bootbox
+										.alert({
+											size : 'medium',
+											title : 'Error!',
+											message : 'Product Count should be between 1 and 3 !'
+										})
+							} else {
+								var updateUrl = window.contextRoot + '/cart/'
+										+ cartLineId + '/update?count='
+										+ currentCount;
+								//forward it to the controller
+								window.location.href = updateUrl;
+								
+							}
+						}
+					});
 });

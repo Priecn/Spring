@@ -34,14 +34,14 @@
 				</security:authorize>
 
 				<security:authorize access="isAuthenticated()">
-					<li class="nav-item dropdown"><a
+					<li class="nav-item dropdown" id="profileDropDown"><a
 						class="nav-link dropdown-toggle" href="javascript:void(0)"
-						data-toggle="dropdown" id="profileDropDown">
+						data-toggle="dropdown">
 							${userModel.fullName} </a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="${contextRoot}/profile">Profile</a>
 							<security:authorize access="hasAuthority('USER')">
-								<a class="dropdown-item" href="${contextRoot}/cart"><span
+								<a class="dropdown-item" href="${contextRoot}/cart/show"><span
 									class="fa fa-shopping-cart"></span>&#160;${userModel.cart.cartLines}&#160;Items-
 									&#8377; &#160;${userModel.cart.grandTotal} </a>
 							</security:authorize>

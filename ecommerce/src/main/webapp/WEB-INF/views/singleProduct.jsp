@@ -13,10 +13,9 @@
 
 	<div class="row">
 		<!-- image -->
-		<div class="col-xs-12 col-sm-4">
-			<div class="thumbnail">
-				<img src="${images}/${product.code}.jpg" class="img img-responsive" />
-			</div>
+		<div class="col-xs-12 col-sm-4 col-md-4">
+			<img src="${images}/${product.code}.jpg"
+				class="img img-thumbnail float-left" />
 		</div>
 		<!-- description -->
 		<div class="col-xs-12 col-sm-8">
@@ -30,29 +29,30 @@
 			<hr>
 
 			<security:authorize access="hasAuthority('USER')">
-			<c:choose>
-				<c:when test="${product.quantity < 1}">
-					<h6>
-						Quantity Available: <span style="color: red;">Out of Stock!</span> <a
-							href="javascript:void(0)" class="btn btn-success disabled"><strike><i
-								class="fa fa-shopping-cart">Add to Cart</i></strike></a>
-					</h6>
-				</c:when>
-				<c:otherwise>
-					<h6>Quantity Available: ${product.quantity}</h6>
-					<a href="${contextRoot}/cart/add/${product.id}/product"
-						class="btn btn-success"><i class="fa fa-shopping-cart">Add
-							to Cart</i></a>
-				</c:otherwise>
-			</c:choose>
+				<c:choose>
+					<c:when test="${product.quantity < 1}">
+						<h6>
+							Quantity Available: <span style="color: red;">Out of
+								Stock!</span> <a href="javascript:void(0)"
+								class="btn btn-success disabled"><strike><i
+									class="fa fa-shopping-cart text-right">Add to Cart</i></strike></a>
+						</h6>
+					</c:when>
+					<c:otherwise>
+						<h6>Quantity Available: ${product.quantity}</h6>
+						<a href="${contextRoot}/cart/add/${product.id}/product"
+							class="btn btn-success"><i class="fa fa-shopping-cart text-right">Add
+								to Cart</i></a>
+					</c:otherwise>
+				</c:choose>
 			</security:authorize>
-			
+
 			<security:authorize access="hasAuthority('ADMIN')">
 				<a href="${contextRoot}/manage/${product.id}/product"
-						class="btn btn-warning"><i class="fa fa-edit">Edit Product</i></a>
+					class="btn btn-warning"><i class="fa fa-edit">Edit Product</i></a>
 			</security:authorize>
-			<a href="${contextRoot}/show/all/products" class="btn btn-primary"><i
-				class="fa fa-arrow-left">Go Back</i></a>
+			<a href="${contextRoot}/show/all/products" class="btn btn-primary text-left"><i
+				class="fa fa-angle-left">&#160; Go Back</i></a>
 		</div>
 	</div>
 </div>
